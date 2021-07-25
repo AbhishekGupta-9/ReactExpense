@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExoense/NewExpense";
 function App() {
@@ -15,10 +16,19 @@ function App() {
       amount: 2290,
     },
   ];
+
+  const [ex, setex] = useState(expenses);
+
+  const addExpense = (expense) => {
+    //setex([expense,...ex]);
+    setex((prevState) => {
+      return [expense, ...ex];
+    });
+  };
   return (
     <div>
-      <NewExpense />
-      <Expenses items={expenses} />
+      <NewExpense onAddExpense={addExpense} />
+      <Expenses items={ex} />
     </div>
   );
 }
